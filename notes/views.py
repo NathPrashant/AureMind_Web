@@ -9,14 +9,11 @@ from datetime import datetime , date, timedelta
 from django.utils import timezone
 from calendar import monthrange
 from django.db.models import Q  
-import json
 from django.http import JsonResponse, HttpResponse, Http404
 from django.conf import settings
 from django.urls import reverse
-import google.generativeai as genai
 import mimetypes # To guess the file type
 import calendar
-import markdown # <-- IMPORT ADDED
 
 
 @login_required
@@ -163,85 +160,6 @@ def serve_attachment(request, pk):
     response = HttpResponse(decrypted_bytes, content_type=content_type)
     response['Content-Disposition'] = f'inline; filename="{file_name}"'
     return response
-
-
-@login_required
-def chat_view(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            prompt = data.get('prompt')
-            note_id = data.get('note_id') 
-
-            if not prompt:
-                return JsonResponse({'error': 'No prompt provided.'}, status=400)
-            
-            final_prompt = prompt
-            
-            if note_id:
-                try:
-                    note = Note.objects.get(pk=note_id, user=request.user)
-                    final_prompt = (
-                        f"Please use the following note as context:\n"
-                        f"--- NOTE START ---\n"
-                        f"Title: {note.title}\n"
-                        f"Content: {note.content}\n" 
-                        f"--- NOTE END ---\n\n"
-                        f"Now, please respond to this prompt: {prompt}"
-                    )
-                except Note.DoesNotExist:
-                    pass 
-
-            genai.configure(api_key=settings.GOOGLE_API_KEY)
-            model = genai.GenerativeModel('gemini-2.5-pro') 
-            response = model.generate_content(final_prompt) 
-            
-            # --- MODIFICATIONS HERE ---
-            ai_response_raw = response.text
-            # Use the 'fenced_code' extension
-            ai_response_html = markdown.markdown(ai_response_raw, extensions=['fenced_code'])
-
-            return JsonResponse({'response': ai_response_html, 'raw_response': ai_response_raw})
-            # --- END MODIFICATIONS ---
-
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-
-    else:
-        user_notes = Note.objects.filter(user=request.user).order_by('-created_at')
-        context = {
-            'all_notes': user_notes
-        }
-        return render(request, 'AI/chat.html', context)
-
-
-@login_required
-def save_chat_note(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            prompt = data.get('prompt')
-            ai_response = data.get('ai_response')
-
-            if not prompt or not ai_response:
-                return JsonResponse({'error': 'Missing prompt or response.'}, status=400)
-
-            title = ' '.join(ai_response.split()[:5]) + "..."
-            content = f"**My Prompt:**\n{prompt}\n\n**AI Response:**\n{ai_response}"
-
-            new_note = Note(
-                user=request.user,
-                title=f"Chat: {title}"
-            )
-            new_note.content = content 
-            new_note.save()
-
-            return JsonResponse({'status': 'success', 'message': 'Note saved!'})
-
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 def about(request):
     return render(request, 'notes/about.html', {'year': datetime.now().year}) 

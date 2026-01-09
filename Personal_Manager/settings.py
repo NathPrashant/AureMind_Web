@@ -135,5 +135,3 @@ LOGOUT_REDIRECT_URL = 'notes:login'       # where to go after logout
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-GOOGLE_API_KEY = os.environ.get('AI_API_KEY')

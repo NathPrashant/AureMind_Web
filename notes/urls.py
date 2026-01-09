@@ -38,8 +38,4 @@ urlpatterns = [
     path('task/<int:pk>/edit/', views.task_update, name='task_edit'),
     path('task/<int:pk>/delete/', views.task_delete, name='task_delete'),
     path('task-notifications/', views.check_task_notifications, name='task_notifications'),
-
-    #AI Chat Integration
-    path('chat/', views.chat_view, name='chat'),
-    path('save_chat/', views.save_chat_note, name='save_chat')
 ]
