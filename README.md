@@ -6,10 +6,8 @@ AureMind is an **AI-assisted Personal Manager web app** built as a college softw
 
 AureMind was developed by **Group 10** of the Software Engineering class at Delhi University:
 
-* Dhruv Kashyap
 * Prashant Nath
 * Demas Fadel Anggara
-* Anuj Rajput
 
 This project draws inspiration from tools like **Notion**, **Obsidian**, and other productivity applications. It was created to fulfill academic requirements and demonstrate full-stack development skills.
 
