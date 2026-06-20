@@ -2,7 +2,7 @@
 
 AureMind is an **AI-assisted Personal Manager web app** built as a college software engineering project. It combines note taking, task tracking, and productivity tools into a simple and intuitive interface to help users organize their daily activities and ideas.
 
-## 📌 Overview
+##  Overview
 
 AureMind was developed by **Group 10** of the Software Engineering class at Delhi University:
 
@@ -11,7 +11,7 @@ AureMind was developed by **Group 10** of the Software Engineering class at Delh
 
 This project draws inspiration from tools like **Notion**, **Obsidian**, and other productivity applications. It was created to fulfill academic requirements and demonstrate full-stack development skills.
 
-## 🚀 Features
+##  Features
 
 * User authentication and profile management
 * Create, edit, and delete notes
@@ -19,7 +19,7 @@ This project draws inspiration from tools like **Notion**, **Obsidian**, and oth
 * Simple and responsive UI
 * Django-powered backend
 
-## 🧠 Tech Stack
+##  Tech Stack
 
 | Layer    | Technology     |
 | -------- | -------------- |
@@ -28,7 +28,7 @@ This project draws inspiration from tools like **Notion**, **Obsidian**, and oth
 | Database | SQLite         |
 | Tools    | Git, GitHub    |
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 AureMind/
@@ -41,7 +41,7 @@ AureMind/
 └── .gitignore
 ```
 
-## 🛠️ Installation
+##  Installation
 
 ### 1. Clone the repository
 
@@ -82,13 +82,13 @@ Open your browser and visit:
 http://127.0.0.1:8000/
 ```
 
-## ✅ Usage
+##  Usage
 
 * Register or log in as a user
 * Create and manage notes
 * Track tasks and organize daily activities
 
-## 🧪 Contributing
+##  Contributing
 
 This project was created primarily for academic purposes, but contributions are welcome.
 
@@ -97,9 +97,3 @@ This project was created primarily for academic purposes, but contributions are 
 3. Commit your changes
 4. Open a pull request
 
-
----
-
-Made with ❤️ as a Software Engineering college project.
-
----
