@@ -32,7 +32,7 @@ This project draws inspiration from tools like **Notion**, **Obsidian**, and oth
 
 ```
 AureMind/
-├── college_project/
+├── Personal_Manager/
 ├── Django/
 ├── db.sqlite3
 ├── manage.py
